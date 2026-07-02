@@ -19,3 +19,7 @@ class Node{
         next=nullptr;
     }
 };
+
+Node* flatten(Node* head){
+    
+}
