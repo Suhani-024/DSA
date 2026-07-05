@@ -20,6 +20,40 @@ class Node{
     }
 };
 
-Node* flatten(Node* head){
-    
+Node* merge(Node* head1,Node* head2){
+    Node* t1=head1;
+    Node* t2=head2;
+
+    Node* dnode=new Node(-1);
+    Node* temp=dnode;
+    while(t1 !=nullptr && t2 != nullptr){
+        if(t1->data<t2->data){
+            temp->next=t1;
+            temp=t1;
+            t1=t1->next;
+        }
+        else{
+            temp->next=t2;
+            temp=t2;
+            t2=t2->next;
+        }
+    }
+    if(t1)  temp->next=t1;
+    if(t2)  temp->next=t2;
+    return dnode->next;
 }
+
+
+Node* fl(Node* head){
+    if(head==nullptr || head->next==nullptr){
+        return head;
+    }
+    Node* mergehead=fl(head->next);
+    return merge(head,mergehead);
+
+}
+Node* flatten(Node* head){
+    return fl(head);
+}
+
+
